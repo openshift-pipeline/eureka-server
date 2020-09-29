@@ -26,4 +26,4 @@ COPY target/cloud-demo-eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
 ENTRYPOINT ["java","-jar","-Xms512m", "-Xmx1024m","/eureka-server.jar"]
 
 #声明运行时容器提供服务端口，这只是一个声明，在运行时并不会因为这个声明应用就会开启这个端口的服务
-EXPOSE 8761
+EXPOSE 8080
