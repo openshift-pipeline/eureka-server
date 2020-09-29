@@ -7,6 +7,7 @@
 FROM image-registry.openshift-image-registry.svc:5000/openshift/mvn as BUILD
 COPY src /usr/app/src
 COPY pom.xml /usr/app
+COPY configuration/settings.xml /etc/maven/settings.xml
 
 RUN mvn -f /usr/app/pom.xml clean package -Dmaven.test.skip=true
 
