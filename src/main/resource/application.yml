@@ -1,0 +1,16 @@
+server:
+ port: 8080 # 你的端口
+spring:
+  application:
+    name: service-registry
+eureka:
+ instance:
+   hostname: cloud-demo-eureka-server.poc-java-demo.svc.cluster.local # 你的地址
+   instance-id: ${spring.application.name}:${server.port}:@project.version@
+   prefer-ip-address: false
+ client:
+   registerWithEureka: false # 表示是否注册自身到eureka服务器，因为当前这个应用就是eureka服务器，没必要注册自身，所以这里是false
+   fetchRegistry: false # fetchRegistry表示是否从eureka服务器获取注册信息
+   serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      #defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
