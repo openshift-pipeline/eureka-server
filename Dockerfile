@@ -4,12 +4,12 @@
 #EXPOSE 8761
 #ENTRYPOINT ["java","-jar","/eureka-server.jar"]
 
-FROM image-registry.openshift-image-registry.svc:5000/openshift/mvn as BUILD
-COPY src /usr/app/src
-COPY pom.xml /usr/app
-COPY configuration/settings.xml /root/.m2/settings.xml
+#FROM image-registry.openshift-image-registry.svc:5000/openshift/mvn as BUILD
+#COPY src /usr/app/src
+#COPY pom.xml /usr/app
+#COPY configuration/settings.xml /root/.m2/settings.xml
 
-RUN mvn -f /usr/app/pom.xml clean package -Dmaven.test.skip=true
+#RUN mvn -f /usr/app/pom.xml clean package -Dmaven.test.skip=true
 
 FROM image-registry.openshift-image-registry.svc:5000/openshift/openjdk:8-jdk-alpine
 #FROM java:8
@@ -19,7 +19,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 VOLUME /tmp
 #ARG JAR_FILE
 #复制上下文目录下的target/demo-1.0.0.jar 到容器里
-COPY --from=BUILD /usr/app/target/cloud-demo-eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
+#COPY --from=BUILD /usr/app/target/cloud-demo-eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
+COPY target/cloud-demo-eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
 
 #指定容器启动程序及参数   <ENTRYPOINT> "<CMD>"
 ENTRYPOINT ["java","-jar","-Xms512m", "-Xmx1024m","/eureka-server.jar"]

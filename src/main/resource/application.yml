@@ -5,7 +5,7 @@ spring:
     name: service-registry
 eureka:
  instance:
-   hostname: eureka-server.poc-java-demo.svc.cluster.local # 你的地址
+   hostname: eureka-server # 你的地址eureka-server..poc-java-demo.svc.cluster.local
    instance-id: ${spring.application.name}:${server.port}:@project.version@
    prefer-ip-address: false
  client:
